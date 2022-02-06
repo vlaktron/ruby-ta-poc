@@ -1,6 +1,6 @@
 # Ruby-ta-poc
 
-Test repo for expermenting with a Ruby based test automation framework for API and UI tests
+Test repo for experimenting with a Ruby based test automation framework for API and UI tests
 
 ## Usage
 
