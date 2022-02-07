@@ -15,7 +15,23 @@ RSpec.describe 'Get Booking Ids' do
   end
 
   it 'should return booking id by name' do
-    get '/booking', { params: { firstname: 'Sally', lastname: 'brown' } }
+    # arrange
+    checkin_date = Time.new.strftime('%Y-%m-%d')
+    checkout_date = Time.now.strftime('%Y-%m-%d')
+    body = { firstname: 'test',
+             lastname: 'automation',
+             totalprice: 500,
+             depositpaid: true,
+             bookingdates: { checkin: checkin_date, checkout: checkout_date },
+             additionalneeds: 'Breakfast' }
+
+    post '/booking', body, { content_type: 'application/json', accept: 'application/json' }
+    @booking_id = json_body[:bookingid]
+
+    # act
+    get '/booking', { params: { firstname: 'test', lastname: 'automation' } }
+
+    # assert
     expect_status '200'
     expect_json_sizes(1)
   end
